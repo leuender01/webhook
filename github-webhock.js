@@ -8,7 +8,7 @@ dotenv.config();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const app = express();
-const PORT = process.env.PORT;
+const PORT = Number(process.env.PORT);
 if(!PORT) throw Error("Porta não definida no arquivo .env");
 
 function notifcacao(title, message){
@@ -25,6 +25,7 @@ app.use(express.json());
 
 app.post("/notification", (req, res) => {
     const githubEvent = req.headers['x-github-event'];
+    console.log(`Evento recebido: ${githubEvent}`);
     if(githubEvent === 'ping'){
         const title = "PING servidor";
         const message = "Conexão estabelecida com sucesso!";
@@ -40,5 +41,5 @@ app.post("/notification", (req, res) => {
 })
 
 app.listen(PORT, () =>{
-    console.log(`Exemplo rodado na porta ${PORT}`);
+    console.log(`Rodando na porta ${PORT}`);
 })
