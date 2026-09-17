@@ -11,6 +11,7 @@ const app = express();
 const PORT = Number(process.env.PORT);
 if(!PORT) throw Error("Porta não definida no arquivo .env");
 
+
 function notifcacao(title, message){
         notifier.notify({
             title,
